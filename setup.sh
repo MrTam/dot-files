@@ -15,7 +15,6 @@ for file in .[0-9A-Za-z]*; do
     fi
 
     if [ -e $dest ]; then 
-        mkdir -p backup 2> /dev/null
         echo "backing up existing file $dest -> backup/$file"
         mv $dest backup/$file 2> /dev/null
     fi
