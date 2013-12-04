@@ -1,0 +1,7 @@
+[user]
+	email = thomasgibson@vulcanft.com
+	name = Thomas Gibson
+[core]
+	editor = vim
+[push]
+	default = simple
