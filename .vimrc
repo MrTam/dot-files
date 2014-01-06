@@ -17,7 +17,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tomasr/molokai'
 
-set rtp+=/opt/powerline/powerline/bindings/vim
+set rtp+=/usr/local/lib/python2.7/dist-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
 
 filetype plugin indent on
 

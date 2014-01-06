@@ -132,11 +132,13 @@ function todos
     done
 }
 
-export CC=gcc
-export CXX=g++
+export CC=clang
+export CXX=clang++
 export PATH=/opt/openmama/bin:$PATH
 export LD_LIBRARY_PATH=/opt/openmama/lib:/opt/vulcan/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export WOMBAT_PATH=/home/thomas/wombat
 
 export LANG=en_GB.UTF-8
 export LOCALE=UTF-8
+
+alias mamalistenc="mamalistenc -m avis"
