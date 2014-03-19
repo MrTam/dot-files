@@ -2,7 +2,11 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-#export TERM=xterm-256color
+ulimit -c unlimited
+
+if [ $TERM == "xterm" ]; then
+    export TERM=xterm-256color
+fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -132,11 +136,31 @@ function todos
     done
 }
 
+function ext_rename
+{
+    if [ $# -ne 2 ]; then
+        echo "usage: ext_rename <from> <to>"
+    else
+        export SOURCE=$1
+        export DEST=$2
+        find *.$SOURCE -exec bash -c 'mv {} `echo {} | cut -d "." -f1`.$DEST' \; 
+    fi
+}
+
+# vi mode
+set -o vi
+
 #export CC=clang
 #export CXX=clang++
 export PATH=/opt/openmama/bin:$PATH
 export LD_LIBRARY_PATH=/opt/openmama/lib:/opt/vulcan/lib:/usr/local/lib:$LD_LIBRARY_PATH
-export WOMBAT_PATH=/home/tgibson/wombat
+export WOMBAT_PATH=/opt/openmama/config/
 
 export LANG=en_GB.UTF-8
 export LOCALE=UTF-8
+
+export VDPAU_DRIVER=i965
+
+# ANVIL
+export CLIENT_KEY=WKjPwhwKVOubdbtHAtr10u6xRpFKik74mVwnmdOP
+export CLIENT_SECRET=vNbfGTLrXGh5HtEvPlQHPxoaUZsP8YmMkgeArG0NZGIM2rPOVwSEtgG

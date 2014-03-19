@@ -115,3 +115,6 @@ if ! has('gui_running')
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
+
+" vsl
+au BufNewFile,BufRead *.vsl set filetype=vsl
