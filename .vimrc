@@ -17,7 +17,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tomasr/molokai'
 
-set rtp+=/usr/lib/python2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 
 filetype plugin indent on
 
@@ -28,7 +28,7 @@ set nocompatible
 
 set autoread
 
-set number
+set nonumber
 
 set ambiwidth=single
 set encoding=utf-8
