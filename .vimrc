@@ -12,13 +12,13 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/ListToggle'
 Bundle 'johnsyweb/vim-makeshift'
 Bundle 'plasticboy/vim-markdown.git'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tomasr/molokai'
+Bundle 'blinks/vim-antlr'
 
 set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 
+syntax enable
 filetype plugin indent on
 
 set nocursorcolumn 
@@ -48,7 +48,7 @@ set ttyfast
 
 set noerrorbells
 set novisualbell
-set vb t_vb=
+"set vb t_vb=
 "set t_Co=256
 "set t_ut=
 set tm=500
@@ -66,7 +66,8 @@ set tabstop=4
 set ai
 set si
 
-colorscheme elflord
+set background=dark
+colorscheme elflord 
 
 " YCM Options
 
@@ -74,11 +75,28 @@ let g:ycm_confirm_extra_conf = 0
 
 " Syntastic 
 
+let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list = 1
 let g:lt_location_list_toggle_map = '<F4>'
 
+let g:syntastic_enable_python_checker = 1
+let g:syntastic_python_checkers = ['flake8']
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠ '
+
+let g:syntastic_enable_highlighting = 1
+
+map <F5> :SyntasticCheck<CR>
+map <F6> :SyntasticToggleMode<CR>
+
 " Makeshift
-nnoremap <F5> :<C-U>make<CR>
 
 " NERD Tree
 
@@ -116,5 +134,43 @@ if ! has('gui_running')
     augroup END
 endif
 
-" vsl
-au BufNewFile,BufRead *.vsl set filetype=vsl
+" Nested Jinja2 highlighting
+
+function! TextEnableCodeSnip(filetype,start,end) abort
+  let ft=toupper(a:filetype)
+  let group='textGroup'.ft
+  if exists('b:current_syntax')
+    let s:current_syntax=b:current_syntax
+    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+    " do nothing if b:current_syntax is defined.
+    unlet b:current_syntax
+  endif
+  execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
+  try
+    execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
+  catch
+  endtry
+  if exists('s:current_syntax')
+    let b:current_syntax=s:current_syntax
+  else
+    unlet b:current_syntax
+  endif
+  execute 'syntax region textSnip'.ft.'
+  \ start="'.a:start.'" end="'.a:end.'"
+  \ keepend
+  \ containedin=ALL
+  \ contains=@'.group
+endfunction
+
+au BufNewFile,BufRead */templates/* call TextEnableCodeSnip('jinja', '{{', '}}')
+au BufNewFile,BufRead */templates/* call TextEnableCodeSnip('jinja', '{%', '%}')
+au BufNewFile,BufRead */templates/* call TextEnableCodeSnip('jinja', '{#', '#}')
+
+" PEP8 friendly goodness for python 
+
+au FileType python set autoindent
+au FileType python set smartindent
+au FileType python set textwidth=79 " PEP-8 Friendly
+
+" Enable mouse copy+paste
+se mouse+=a

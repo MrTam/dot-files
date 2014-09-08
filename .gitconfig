@@ -5,3 +5,5 @@
 	editor = vim
 [push]
 	default = matching
+[diff]
+	tool = meld

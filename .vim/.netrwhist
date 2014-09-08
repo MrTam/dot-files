@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/usr/include/boost/iostreams/device'
 let g:netrw_dirhist_2='/usr/include/boost/iostreams'
 let g:netrw_dirhist_3='/usr/include/boost'
 let g:netrw_dirhist_4='/usr/include/boost/iostreams'
 let g:netrw_dirhist_5='/usr/include/boost/iostreams/device'
+let g:netrw_dirhist_6='/home/tgibson/vulcan/catalyst/forge/frontend'

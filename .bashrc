@@ -29,9 +29,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
  
 # set a fancy prompt (non-color, unless we know we "want" color)
-if [ $COLORTERM == "gnome-terminal" ]; then
-    TERM=xterm-256color
-fi
+TERM=xterm-256color
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -49,7 +47,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
  
-if [ "$color_prompt" = yes ]; then
+if [ $color_prompt == "yes" ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -102,66 +100,30 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-function todos
-{
-    for file in $@; do
-        todos=(`cat $file | grep -n TODO | sed 's/TODO: //g'`);
-
-        if [ ${#todos[@]} -gt 0 ]; then
-            echo $file:
-            for todo in $todos; do
-                echo $todo
-            done
-        fi
-    done
-}
-
-function ext_rename
-{
-    if [ $# -ne 2 ]; then
-        echo "usage: ext_rename <from> <to>"
-    else
-        export SOURCE=$1
-        export DEST=$2
-        find *.$SOURCE -exec bash -c 'mv {} `echo {} | cut -d "." -f1`.$DEST' \; 
-    fi
-}
-
-function forge
-{
-    FILE=${1:-$(basename `pwd`).vsl}
-
-    if [ -e $FILE ]; then
-        BINARY="java -jar $FORGE_PATH/target/forge-0.0.1-SNAPSHOT.jar"
-        INPUT=$(readlink -m -n $FILE)
-        OUTPUT=${2:-`pwd`/$(basename ${INPUT%.*})}.xml
-        CMD="$BINARY -x=$FORGE_PATH/resources/product-definition-fh.xsd -p=/home/tgibson/vulcan/vsl/packages -v=$INPUT -o=$OUTPUT -c=false"
-        $CMD
-    else
-        echo "error: $FILE does not exist" > /dev/stderr
-        return 1
-    fi
-}
-
-export CC=clang
-export CXX=clang++
-
-export PATH=/opt/openmama/bin:/home/tgibson/llvm/llvm/tools/clang/tools/scan-build:/home/tgibson/llvm/llvm/tools/clang/tools/scan-view:$PATH
+export WORK_HOME=/home/tgibson
+export PATH=/opt/openmama/bin:$WORK_HOME/llvm/llvm/tools/clang/tools/scan-build:$WORK_HOME/llvm/llvm/tools/clang/tools/scan-view:$PATH
 export LD_LIBRARY_PATH=/opt/openmama/lib:/opt/vulcan/lib:/usr/local/lib:$LD_LIBRARY_PATH
 export WOMBAT_PATH=/opt/openmama/config/
 
 export LOCAL_CLIENT_KEY=hFBP5FP2Q237MGnvrW3w9h8uUljVMmX4r8tc0gMZ
 export LOCAL_CLIENT_SECRET=UbQnok2awIDxwYFruCyLODhFfM2uCyRXKCiWz1QnJxKZsg1nFnvJ5GZ
-export CLASSPATH=/usr/local/lib/antlr-4.1-complete.jar:$CLASSPATH
-export FORGE_PATH=/home/tgibson/vulcan/forge/
+export CLASSPATH=".:/usr/local/lib/antlr-4.3-complete.jar:/usr/local/lib/antlr-runtime-4.3.jar:$CLASSPATH"
+
+export QT_GRAPHICSSYSTEM="native"
 
 export LANG=en_GB.UTF-8
 export LOCALE=UTF-8
 
-alias catalyst='python -m catalyst.main'
+alias antlr='java -jar /usr/local/lib/antlr-4.3-complete.jar'
+alias grun='CLASSPATH=`python -c "import carbon; print carbon.CLASSPATH"` java org.antlr.v4.runtime.misc.TestRig carbon.Carbon start -gui'
+alias jcc='python -m jcc'
 alias scons='scons -j4'
 alias helgrind='valgrind --tool=helgrind'
 alias callgrind='valgrind --tool=callgrind'
 alias cachegrind='valgrind --tool=cachegrind'
-
 alias anvil='anvil -s localhost -k $LOCAL_CLIENT_KEY -t $LOCAL_CLIENT_SECRET'
+alias sl='ls'
+
+alias ls='ls --color=auto -I\*.pyc'
+
+alias forge='PYTHONPATH=~/vulcan/catalyst python -m forge'
