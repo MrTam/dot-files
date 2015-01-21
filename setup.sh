@@ -31,4 +31,4 @@ vim +PluginInstall +qall
 
 # Setup YCM
 cd $HOME/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer
+./install.sh --clang-completer --system-libclang --system-boost
