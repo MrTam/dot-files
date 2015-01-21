@@ -24,8 +24,6 @@ for file in .[0-9A-Za-z]*; do
 done
 
 # Setup vundle
-
-cd $HOME/.vim/bundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Run vundle update
