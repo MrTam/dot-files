@@ -30,3 +30,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Run vundle update
 vim +PluginInstall +qall
+
+# Setup YCM
+cd $HOME/.vim/bundle/YouCompleteMe
+./install.sh --clang-completer

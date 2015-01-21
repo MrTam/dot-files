@@ -14,7 +14,6 @@ Plugin 'johnsyweb/vim-makeshift'
 Plugin 'plasticboy/vim-markdown.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tomasr/molokai'
-Plugin 'blinks/vim-antlr'
 
 call vundle#end()
 
