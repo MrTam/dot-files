@@ -22,3 +22,12 @@ for file in .[0-9A-Za-z]*; do
     echo "linking $src -> $dest"
     ln -s $src $dest 2> /dev/null
 done
+
+# Setup vundle
+
+mkdir -p $HOME/.vim/bundle/vundle
+cd $HOME/.vim/bundle/vundle
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Run vundle update
+vim +BundleInstall +qall
