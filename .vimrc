@@ -1,20 +1,22 @@
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/ListToggle'
-Bundle 'johnsyweb/vim-makeshift'
-Bundle 'plasticboy/vim-markdown.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tomasr/molokai'
-Bundle 'blinks/vim-antlr'
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/ListToggle'
+Plugin 'johnsyweb/vim-makeshift'
+Plugin 'plasticboy/vim-markdown.git'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tomasr/molokai'
+Plugin 'blinks/vim-antlr'
+
+call vundle#end()
 
 set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 

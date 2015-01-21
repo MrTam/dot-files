@@ -25,9 +25,8 @@ done
 
 # Setup vundle
 
-mkdir -p $HOME/.vim/bundle/vundle
-cd $HOME/.vim/bundle/vundle
+cd $HOME/.vim/bundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Run vundle update
-vim +BundleInstall +qall
+vim +PluginInstall +qall
