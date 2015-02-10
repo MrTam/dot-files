@@ -123,7 +123,7 @@ alias callgrind='valgrind --tool=callgrind'
 alias cachegrind='valgrind --tool=cachegrind'
 alias anvil='anvil -s localhost -k $LOCAL_CLIENT_KEY -t $LOCAL_CLIENT_SECRET'
 alias sl='ls'
-
 alias ls='ls --color=auto -I\*.pyc'
+alias fs='for f in *; do du -sh "$f"; done | sort -hr'
 
 alias forge='PYTHONPATH=~/vulcan/catalyst python -m forge'

@@ -83,6 +83,9 @@ let g:lt_location_list_toggle_map = '<F4>'
 let g:syntastic_enable_python_checker = 1
 let g:syntastic_python_checkers = ['flake8']
 
+let g:syntastic_enable_ruby_checker = 1
+let g:syntastic_ruby_checkers = ['rubocop']
+
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
