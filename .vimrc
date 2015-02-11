@@ -4,7 +4,6 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
@@ -14,6 +13,10 @@ Plugin 'johnsyweb/vim-makeshift'
 Plugin 'plasticboy/vim-markdown.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tomasr/molokai'
+
+if executable('clang')
+    Plugin 'Valloric/YouCompleteMe'
+endif
 
 call vundle#end()
 

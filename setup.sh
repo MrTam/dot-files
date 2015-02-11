@@ -24,11 +24,19 @@ for file in .[0-9A-Za-z]*; do
 done
 
 # Setup vundle
+echo Cloning Vundle Repository ...
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Run vundle update
+echo Updating Vim Plugins ...
 vim +PluginInstall +qall
 
 # Setup YCM
-cd $HOME/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer --system-libclang --system-boost
+
+YCM_DIR=$HOME/.vim/bundle/YouCompleteMe
+
+if [ -d $YCM_DIR ]; then
+    echo Building YouCompleteMe ...
+    cd $YCM_DIR
+    ./install.sh --clang-completer --system-libclang --system-boost
+fi
