@@ -44,7 +44,7 @@ ${font Arial:size=10}${color #FFFFFF}SYSTEM    ${color DarkSlateGray}${hr 2}{$fo
 ${color #c0c0c0}Hostname: ${color #FFFFFF}${exec hostname}
 ${color #c0c0c0}Kernel:       ${color #FFFFFF}$kernel
 
-${color #c0c0c0}CPU   : ${color #FFFFFF}$freq MHz   $cpu%${alignl}${color #c0c0c0}Temp: ${color #FFFFFF}${hwmon temp 1}°C
+${color #c0c0c0}CPU   : ${color #FFFFFF}$freq MHz   $cpu%${alignr}${color #c0c0c0}Temp: ${color #FFFFFF}${hwmon temp 1}°C
 ${color #c0c0c0}${cpugraph 25,400 fef7b2 e18522}
 ${color #c0c0c0}RAM ${alignr}:  ${color #FFFFFF}$memmax     $memperc% ${color #c0c0c0}${membar 6,150}
 
