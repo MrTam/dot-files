@@ -2,9 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
  
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
- 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
@@ -20,48 +17,7 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
  
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
- 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
- 
-# set a fancy prompt (non-color, unless we know we "want" color)
-TERM=xterm-256color
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
- 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-    else
-    color_prompt=
-    fi
-fi
- 
-if [ $color_prompt == "yes" ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
- 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*|screen*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
  
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -100,30 +56,19 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export WORK_HOME=/home/tgibson
-export PATH=/opt/openmama/bin:$WORK_HOME/llvm/llvm/tools/clang/tools/scan-build:$WORK_HOME/llvm/llvm/tools/clang/tools/scan-view:$PATH
-export LD_LIBRARY_PATH=/opt/openmama/lib:/opt/vulcan/lib:/usr/local/lib:$LD_LIBRARY_PATH
-export WOMBAT_PATH=/opt/openmama/config/
-
-export LOCAL_CLIENT_KEY=hFBP5FP2Q237MGnvrW3w9h8uUljVMmX4r8tc0gMZ
-export LOCAL_CLIENT_SECRET=UbQnok2awIDxwYFruCyLODhFfM2uCyRXKCiWz1QnJxKZsg1nFnvJ5GZ
-export CLASSPATH=".:/usr/local/lib/antlr-4.3-complete.jar:/usr/local/lib/antlr-runtime-4.3.jar:$CLASSPATH"
-
 export QT_GRAPHICSSYSTEM="native"
 
 export LANG=en_GB.UTF-8
 export LOCALE=UTF-8
 
-alias antlr='java -jar /usr/local/lib/antlr-4.3-complete.jar'
-alias grun='CLASSPATH=`python -c "import carbon; print carbon.CLASSPATH"` java org.antlr.v4.runtime.misc.TestRig carbon.Carbon start -gui'
-alias jcc='python -m jcc'
-alias scons='scons -j4'
+alias scons='scons -j2'
 alias helgrind='valgrind --tool=helgrind'
 alias callgrind='valgrind --tool=callgrind'
 alias cachegrind='valgrind --tool=cachegrind'
-alias anvil='anvil -s localhost -k $LOCAL_CLIENT_KEY -t $LOCAL_CLIENT_SECRET'
+
 alias sl='ls'
 alias ls='ls --color=auto -I\*.pyc'
 alias fs='for f in *; do du -sh "$f"; done | sort -hr'
 
-alias forge='PYTHONPATH=~/vulcan/catalyst python -m forge'
+export PATH=/opt/blpapi/bin:$PATH
+export LD_LIBRARY_PATH=/opt/blpapi/lib

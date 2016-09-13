@@ -7,26 +7,30 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/ListToggle'
 Plugin 'johnsyweb/vim-makeshift'
 Plugin 'plasticboy/vim-markdown.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tomasr/molokai'
 
-if executable('clang')
-    Plugin 'Valloric/YouCompleteMe'
-endif
+" if executable('clang')
+"     Plugin 'Valloric/YouCompleteMe'
+" endif
 
 call vundle#end()
 
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim
+
+let g:molokai_original=1
 
 syntax enable
 filetype plugin indent on
 
+set backspace=2
+
 set nocursorcolumn 
-set nocursorline
+set cursorline
 
 set nocompatible
 
@@ -52,9 +56,9 @@ set ttyfast
 
 set noerrorbells
 set novisualbell
-"set vb t_vb=
-"set t_Co=256
-"set t_ut=
+set vb t_vb=
+set t_Co=256
+set t_ut=
 set tm=500
 
 set nobackup
@@ -71,7 +75,7 @@ set ai
 set si
 
 set background=dark
-colorscheme elflord 
+colorscheme molokai 
 
 " YCM Options
 
@@ -97,6 +101,8 @@ let g:syntastic_warning_symbol = '⚠'
 
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠ '
+
+let g:syntastic_cpp_include_dirs = ["/opt/blpapi/include"]
 
 let g:syntastic_enable_highlighting = 1
 
